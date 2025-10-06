@@ -1,50 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
+import useInputField from '../../Hooks/useInputField';
 
-const ControlledField = () => {
-    // declearling a state for the password control 
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
+const HookForm = () => {
+    // Calling my own Hook 
+    const [name, nameOnChange] = useInputField('');
+    const [email, emailOnChange] = useInputField('');
+    const [password, passwordOnChnage] = useInputField('');
 
-    const handleEmailOnChange = e => {
-        setEmail(e.target.value)
-    }
-
-    const handlePassWordOnChange = (e) => {
-        // console.log(e.target.value)
-        setPassword(e.target.value);
-        if (password.length < 6) {
-            setError('Password must be six characters or longer')
-        }
-        else {
-            setError('');
-        }
-    }
-
-    const handleUsernameOnChange = (e) => {
-        // console.log(e.target.value);
-        setUsername(e.target.value);
-    }
-
-    // Handler Function 
-    const handleSubmit = (e) => {
+    const handleSubmission = (e) => {
         e.preventDefault();
-        console.log(username);
-        console.log(email);
-        console.log(password);
-        if (password.length <= 6) {
-            setError('Password must be six characters or longer')
-        }
-        else {
-            setError('');
-        }
-
+        console.log('Successfully Submitted', name, email, password);
+        // console.log(name.length);
     }
     return (
         <div className='flex items-center justify-center mt-10 p-10'>
             <form
-                onSubmit={handleSubmit}
+                onSubmit={handleSubmission}
                 className='flex flex-col items-center justify-between space-y-8 border w-1/2 p-2 py-4 rounded-2xl'>
                 <div className='grid grid-cols-1 space-y-4 w-3/4'>
                     <label htmlFor="username"
@@ -54,8 +25,8 @@ const ControlledField = () => {
                         placeholder='username'
                         name='username'
                         id='username'
-                        onChange={handleUsernameOnChange}
-                        defaultValue={username}
+                        defaultValue={name}
+                        onChange={nameOnChange}
                         className='border  px-4 py-2 rounded-2xl bg-gray-700 text-white' />
                 </div>
                 <div className='grid grid-cols-1 space-y-4 w-3/4'>
@@ -64,11 +35,10 @@ const ControlledField = () => {
                     <input
                         type="email"
                         name="email"
+                        defaultValue={email}
+                        onChange={emailOnChange}
                         id="email"
                         placeholder='Your Mail'
-                        onChange={handleEmailOnChange}
-                        defaultValue={email}
-                        required
                         className='border  px-4 py-2 rounded-2xl bg-gray-700 text-white' />
                 </div>
                 <div className='flex items-center justify-center space-x-8'>
@@ -80,8 +50,8 @@ const ControlledField = () => {
                         name='password'
                         placeholder='password'
                         id='password'
-                        onChange={handlePassWordOnChange}
                         defaultValue={password}
+                        onChange={passwordOnChnage}
                         required
                         className='border px-2 py-2 rounded-2xl text-center' />
                 </div>
@@ -92,14 +62,10 @@ const ControlledField = () => {
                         name='submit'
                         className='border w-full p-2 rounded-2xl bg-amber-300 text-black font-bold hover:bg-amber-400 duration-300' />
                 </div>
-                <div>
-                    <p className='text-red-400'>
-                        {error}
-                    </p>
-                </div>
+
             </form>
         </div>
     );
 };
 
-export default ControlledField;
+export default HookForm;

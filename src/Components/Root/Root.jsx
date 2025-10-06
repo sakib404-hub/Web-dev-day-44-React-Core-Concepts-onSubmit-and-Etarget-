@@ -3,6 +3,7 @@ import Form from '../Form/Form';
 import Form2 from '../Form2/Form2';
 import ControlledField from '../ControlledField/ControlledField';
 import UnControlled from '../Uncontrolled/UnControlled';
+import HookForm from '../HookForm/HookForm';
 
 const Root = () => {
     return (
@@ -13,7 +14,8 @@ const Root = () => {
             <main>
                 {/* <Form2></Form2> */}
                 {/* <ControlledField></ControlledField> */}
-                <UnControlled></UnControlled>
+                {/* <UnControlled></UnControlled> */}
+                <HookForm></HookForm>
             </main>
             <footer></footer>
         </div>
